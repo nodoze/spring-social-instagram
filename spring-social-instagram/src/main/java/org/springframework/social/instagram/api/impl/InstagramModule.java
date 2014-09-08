@@ -1,7 +1,5 @@
 package org.springframework.social.instagram.api.impl;
 
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.module.SimpleModule;
 import org.springframework.social.instagram.api.Caption;
 import org.springframework.social.instagram.api.Comment;
 import org.springframework.social.instagram.api.CommentsInfo;
@@ -14,6 +12,9 @@ import org.springframework.social.instagram.api.PagedMediaList;
 import org.springframework.social.instagram.api.Pagination;
 import org.springframework.social.instagram.api.Relationship;
 import org.springframework.social.instagram.api.Tag;
+
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class InstagramModule extends SimpleModule {
 

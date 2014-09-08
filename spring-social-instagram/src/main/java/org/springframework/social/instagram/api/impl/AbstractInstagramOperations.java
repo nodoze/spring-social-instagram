@@ -35,7 +35,7 @@ public abstract class AbstractInstagramOperations {
 	
 	protected void requireUserAuthorization() {
 		if(!isAuthorized) {
-			throw new MissingAuthorizationException();
+			throw new MissingAuthorizationException("instagram");
 		}
 	}
 	

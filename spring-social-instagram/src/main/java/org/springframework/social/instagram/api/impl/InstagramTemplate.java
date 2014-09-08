@@ -3,10 +3,15 @@ package org.springframework.social.instagram.api.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static com.fasterxml.jackson.databind.SerializationFeature.FAIL_ON_EMPTY_BEANS;
+import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.social.instagram.api.Instagram;
 import org.springframework.social.instagram.api.LocationOperations;
 import org.springframework.social.instagram.api.MediaOperations;
@@ -15,6 +20,8 @@ import org.springframework.social.instagram.api.UserOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * This is the central class for interacting with Instagram.
@@ -62,8 +69,8 @@ public class InstagramTemplate extends AbstractOAuth2ApiBinding implements Insta
 	private InstagramTemplate(String clientId, String accessToken, boolean isAuthorizedForUser) {
 	    super(accessToken);
 		this.clientId = clientId;
-		this.accessToken = accessToken;	
-		MappingJacksonHttpMessageConverter json = new MappingJacksonHttpMessageConverter();
+		this.accessToken = accessToken;
+		MappingJackson2HttpMessageConverter json = new MappingJackson2HttpMessageConverter();
         json.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "javascript")));
 		getRestTemplate().getMessageConverters().add(json);
 		registerInstagramJsonModule(getRestTemplate());
@@ -78,10 +85,15 @@ public class InstagramTemplate extends AbstractOAuth2ApiBinding implements Insta
 	private void registerInstagramJsonModule(RestTemplate restTemplate) {
 	    List<HttpMessageConverter<?>> converters = restTemplate.getMessageConverters();
         for (HttpMessageConverter<?> converter : converters) {
-            if(converter instanceof MappingJacksonHttpMessageConverter) {
-                MappingJacksonHttpMessageConverter jsonConverter = (MappingJacksonHttpMessageConverter) converter;
+            if(converter instanceof MappingJackson2HttpMessageConverter) {
+            	MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
                 ObjectMapper objectMapper = new ObjectMapper();             
-                objectMapper.registerModule(new InstagramModule());
+        		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+        		objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
+        		objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
+        		objectMapper.setSerializationInclusion(NON_NULL);
+        		jsonConverter.setObjectMapper(objectMapper);
+                //objectMapper.registerModule(new InstagramModule());
                 jsonConverter.setObjectMapper(objectMapper);
             }
         }
