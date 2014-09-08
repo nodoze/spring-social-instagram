@@ -10,6 +10,7 @@ public class InstagramServiceProvider extends AbstractOAuth2ServiceProvider<Inst
 	
 	public InstagramServiceProvider(String clientId, String clientSecret) {
 		super(new InstagramOAuth2Template(clientId, clientSecret));
+		 //super(clientId, clientSecret,"authorizeUrl", "authenticateUrl", "accessTokenUrl", true, TokenStrategy.ACCESS_TOKEN_PARAMETER);
 		this.clientId = clientId;
 	}
 	
