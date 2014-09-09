@@ -19,6 +19,7 @@ public class InstagramOAuth2Template extends OAuth2Template {
 
 	public InstagramOAuth2Template(String clientId, String clientSecret) {
 		super(clientId, clientSecret, "https://api.instagram.com/oauth/authorize", "https://api.instagram.com/oauth/access_token");
+		super.setUseParametersForClientAuthentication(true);
 	}
 	
 	@Override
@@ -37,7 +38,8 @@ public class InstagramOAuth2Template extends OAuth2Template {
 	@SuppressWarnings("unchecked")	
 	protected AccessGrant postForAccessGrant(String accessTokenUrl, MultiValueMap<String, String> parameters) {
 		// TODO: Look into weird JSON response bug.
-		System.out.println("ClientId is passed:" + parameters.containsKey("client_id"));
+//		parameters.add("client_id",  "0db32271d75f4f72b2b991e9dbe037e0");
+//		System.out.println("ClientId ssss is passed:" + parameters.containsKey("client_id"));
 		Map<String,Object> response = getRestTemplate().postForObject(accessTokenUrl, parameters, Map.class);
 		Entry<String,Object> entry = response.entrySet().iterator().next();
 		String jsonString = entry.getKey();
