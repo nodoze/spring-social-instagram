@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -135,8 +136,7 @@ public class UserTemplateTest extends AbstractInstagramApiTest {
 	public void blockUser() {
 		mockServer.expect(requestTo("https://api.instagram.com/v1/users/12345/relationship/?access_token=ACCESS_TOKEN"))
 			.andExpect(method(POST))
-			.andExpect(jsonPath("$.action").value("block"))
-			//.andExpect(body("action=block"))
+			.andExpect(content().string("action=block"))
 			.andRespond(withSuccess(jsonResource("testdata/ok-response.json"), MediaType.APPLICATION_JSON));
 		
 		instagram.userOperations().blockUser(12345);
@@ -147,7 +147,7 @@ public class UserTemplateTest extends AbstractInstagramApiTest {
 	public void unblockUser() {
 		mockServer.expect(requestTo("https://api.instagram.com/v1/users/12345/relationship/?access_token=ACCESS_TOKEN"))
 			.andExpect(method(POST))
-			//.andExpect(body("action=unblock"))
+			.andExpect(content().string("action=unblock"))
 			.andRespond(withSuccess(jsonResource("testdata/ok-response.json"), MediaType.APPLICATION_JSON));
 
 		instagram.userOperations().unblockUser(12345);
@@ -158,7 +158,7 @@ public class UserTemplateTest extends AbstractInstagramApiTest {
 	public void approveUser() {
 		mockServer.expect(requestTo("https://api.instagram.com/v1/users/12345/relationship/?access_token=ACCESS_TOKEN"))
 			.andExpect(method(POST))
-			//.andExpect(body("action=approve"))
+			.andExpect(content().string("action=approve"))
 			.andRespond(withSuccess(jsonResource("testdata/ok-response.json"), MediaType.APPLICATION_JSON));
 
 		instagram.userOperations().approveUser(12345);
@@ -169,7 +169,7 @@ public class UserTemplateTest extends AbstractInstagramApiTest {
 	public void denyUser() {
 		mockServer.expect(requestTo("https://api.instagram.com/v1/users/12345/relationship/?access_token=ACCESS_TOKEN"))
 			.andExpect(method(POST))
-			//.andExpect(body("action=deny"))
+			.andExpect(content().string("action=deny"))
 			.andRespond(withSuccess(jsonResource("testdata/ok-response.json"), MediaType.APPLICATION_JSON));
 
 		instagram.userOperations().denyUser(12345);

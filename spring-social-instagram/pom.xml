@@ -39,19 +39,6 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.framework.version}</version>
 		</dependency>
-		
-		<!-- 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.framework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.framework.version}</version>
-		</dependency>
-		 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -67,14 +54,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.2.0</version>
 		</dependency>
-
-		<!-- 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-		 -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
@@ -110,16 +89,10 @@
             </plugin>
         </plugins>
     </build>	
-	
 	<repositories>
 		<repository>
 			<id>primary</id>
 			<url>http://repo1.maven.org/maven2</url>
 		</repository>
-		<repository>
-			<id>dev.cellmobs.com</id>
-			<url>http://dev.cellmobs.com/nexus/content/groups/public/</url>
-		</repository>
 	</repositories>
-
 </project>

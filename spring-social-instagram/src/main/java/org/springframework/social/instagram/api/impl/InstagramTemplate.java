@@ -92,8 +92,7 @@ public class InstagramTemplate extends AbstractOAuth2ApiBinding implements Insta
         		objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
         		objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
         		objectMapper.setSerializationInclusion(NON_NULL);
-        		jsonConverter.setObjectMapper(objectMapper);
-                //objectMapper.registerModule(new InstagramModule());
+                objectMapper.registerModule(new InstagramModule());
                 jsonConverter.setObjectMapper(objectMapper);
             }
         }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -13,10 +14,13 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 public abstract class AbstractInstagramApiTest {
 
+	@Autowired
 	public InstagramTemplate instagram;
 	
+	@Autowired
 	protected MockRestServiceServer mockServer;
 
+	@Autowired
 	protected HttpHeaders responseHeaders;
 	
 	@Before
