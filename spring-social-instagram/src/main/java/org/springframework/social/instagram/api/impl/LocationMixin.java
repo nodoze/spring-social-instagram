@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 abstract class LocationMixin {
     @JsonCreator
     LocationMixin(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") String id,
             @JsonProperty("name") String name,
             @JsonProperty("latitude") double latitude,
             @JsonProperty("longitude") double longitude) {}

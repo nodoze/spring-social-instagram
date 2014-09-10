@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 abstract class MediaMixin {
     @JsonCreator
     public MediaMixin(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") String id,
             @JsonProperty("filter") String filter,
             @JsonProperty("link") String link,
             @JsonProperty("caption") Caption caption,

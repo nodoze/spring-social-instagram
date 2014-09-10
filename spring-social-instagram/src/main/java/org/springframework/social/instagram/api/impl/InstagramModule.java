@@ -21,7 +21,7 @@ public class InstagramModule extends SimpleModule {
 	private static final long serialVersionUID = 1L;
 
 	public InstagramModule() {
-        super(InstagramModule.class.getName(), new Version(1, 0, 0, null));
+        super(InstagramModule.class.getName(), new Version(1, 0, 0, null,null,null));
     }
 
     @Override public void setupModule(SetupContext context) {

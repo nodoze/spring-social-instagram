@@ -6,7 +6,13 @@
 	<version>1.0.0.RELEASE</version>
 	<name>Spring Social Instagram</name>
 	<packaging>jar</packaging>
-
+    <description>Spring Social extension with connection support and an API binding for Instagram</description>
+    <developers>
+    	<developer>
+            <name>Oliver Eberle</name>
+            <email>oeberle@gmail.com</email>
+        </developer>
+    </developers>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.framework.version>4.0.2.RELEASE</spring.framework.version>
