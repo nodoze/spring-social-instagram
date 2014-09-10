@@ -43,15 +43,26 @@ public class InstagramProfile {
 	}	
 	
 	public int getMediaCount() {
-	    return counts.get("media");
+		if(counts!=null && counts.containsKey("follows")){
+			return counts.get("media");
+		}
+		return 0;
+			
 	}
 	
 	public int getFollowsCount() {
-	    return counts.get("follows");
+		if(counts!=null && counts.containsKey("follows")){
+			return counts.get("follows");
+		}
+		return 0;
 	}
 	
     public int getFollowedBy() {
-        return counts.get("followed_by");
+    	if(counts!=null && counts.containsKey("follows")){
+    		return counts.get("followed_by");
+		}
+		return 0;
+    		
     }
 
 	public String getBio() {
