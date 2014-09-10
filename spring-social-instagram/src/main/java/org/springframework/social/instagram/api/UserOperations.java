@@ -34,7 +34,7 @@ public interface UserOperations {
      * @param minId Get media after this ID
      * @return List of media
      */
-	PagedMediaList getFeed(long maxId, long minId);
+	PagedMediaList getFeed(String maxId, String minId);
 	
 	/**
 	 * Get recent media of a specific user
@@ -52,7 +52,7 @@ public interface UserOperations {
      * @param manTimestamp Get media before this Unix timestamp
      * @return  List of media
      */
-	 PagedMediaList getRecentMedia(long userId, long maxId, long minId, long minTimestamp, long maxTimestamp);
+	 PagedMediaList getRecentMedia(long userId, String maxId, String minId, long minTimestamp, long maxTimestamp);
 	
 	/**
 	 * Search for users

@@ -11,6 +11,7 @@ import org.springframework.social.instagram.api.Relationship;
 import org.springframework.social.instagram.api.UserOperations;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 
 /**
  * Implementation of {@link UserOperations}, providing a binding to Instagram's user-oriented REST resources.
@@ -31,25 +32,25 @@ public class UserTemplate extends AbstractInstagramOperations implements UserOpe
 	}
 
 	public PagedMediaList getFeed() {
-		return getFeed(0, 0);
+		return getFeed(null, null);
 	}
 	
-	public PagedMediaList getFeed(long maxId, long minId) {
+	public PagedMediaList getFeed(String maxId, String minId) {
 		requireUserAuthorization();
 		Map<String,String> params = new HashMap<String, String>();
-		if(maxId > 0) params.put("max_id", Long.toString(maxId));
-		if(minId > 0) params.put("min_id", Long.toString(minId));
+		if(!StringUtils.isEmpty(maxId)) params.put("max_id", maxId);
+		if(!StringUtils.isEmpty(minId)) params.put("min_id", minId);
 		return get(buildUri(USERS_ENDPOINT + "self/feed/", params), PagedMediaList.class);
 	}
 
 	public PagedMediaList getRecentMedia(long userId) {
-		return getRecentMedia(userId, 0, 0, 0, 0);
+		return getRecentMedia(userId, null, null, 0, 0);
 	}
 
-	public PagedMediaList getRecentMedia(long userId, long maxId, long minId, long minTimestamp, long maxTimestamp) {
+	public PagedMediaList getRecentMedia(long userId, String maxId, String minId, long minTimestamp, long maxTimestamp) {
 		Map<String,String> params = new HashMap<String, String>();
-		if(maxId > 0) params.put("max_id", Long.toString(maxId));
-		if(maxId > 0) params.put("max_id", Long.toString(maxId));
+		if(!StringUtils.isEmpty(maxId)) params.put("max_id", maxId);
+		if(!StringUtils.isEmpty(minId)) params.put("min_id", minId);
 		if(minTimestamp > 0) params.put("min_timestamp", Long.toString(minTimestamp));
 		if(maxTimestamp > 0) params.put("max_timestamp", Long.toString(maxTimestamp));
 		return get(buildUri(USERS_ENDPOINT + Long.toString(userId) + "/media/recent/", params), PagedMediaList.class);
